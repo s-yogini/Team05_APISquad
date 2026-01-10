@@ -4,3 +4,7 @@
 .settings/
 .classpath
 .classpath
+.classpath
+.project
+.settings/
+test-output/
