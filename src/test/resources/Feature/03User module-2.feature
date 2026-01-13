@@ -6,7 +6,7 @@ Given Admin has valid Bearer token
 
 @GETuserbyProgramID
 Scenario Outline: Check if Admin is able to retrieve user with valid/invalid Program ID
-    Given Admin creates GET Request with valid/invalid Program Id for "<Scenario>"
+    Given Admin creates GET Request with valid or invalid Program Id for "<Scenario>"
     When Admin sends HTTPS Request with endpoint
     Then Admin receives StatusCode with statusText
     Examples:

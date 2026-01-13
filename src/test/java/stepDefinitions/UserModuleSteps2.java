@@ -7,26 +7,27 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import requests.UserModule2Requests;
+import requests.UserRequest;
 
 public class UserModuleSteps2 {
 	
-	UserModule2Requests UserRequest = new UserModule2Requests();
+	UserRequest UserRequest = new UserRequest();
 	private RequestSpecification requestSpec;
-	private Response response; 
+	private Response response;
+	
 	
 	@Given("Admin has valid Bearer token")
 	public void admin_has_valid_bearer_token() {
 		requestSpec = UserRequest.setAuth();
 	    
 	}
-
-	@Given("Admin creates GET Request with valid\\/invalid Program Id for {string}")
-	public void admin_creates_get_request_with_valid_invalid_program_id_for(String programId) {
-		requestSpec = UserRequest.buildRequest(requestSpec,programId);
-	    
+	
+	@Given("Admin creates GET Request with valid or invalid Program Id for {string}")
+	public void admin_creates_get_request_with_valid_or_invalid_program_id_for(String string) {
+		UserRequest.
+		requestSpec = UserRequest.buildRequest(requestSpec);
 	}
-
+	
 	@When("Admin sends HTTPS Request with endpoint")
 	public void admin_sends_https_request_with_endpoint() {
 		response = requestSpec.get(); 
@@ -35,7 +36,8 @@ public class UserModuleSteps2 {
 
 	@Then("Admin receives StatusCode with statusText")
 	public void admin_receives_status_code_with_status_text() {
-		int actualStatusCode = response.getStatusCode();
+	   
+	    int actualStatusCode = response.getStatusCode();
         String actualStatusText = response.getStatusLine();
         Assert.assertEquals(actualStatusCode, 200, "Status code mismatch");  
         Assert.assertEquals(actualStatusText, "HTTP/1.1 200 OK", "Status text mismatch");
