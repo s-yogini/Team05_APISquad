@@ -9,7 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import payload.ProgramPayload;
-import pojo.UserModule2Pojo;
+import pojo.UserPojo;
 import utilities.CommonUtils;
 import utilities.TokenManager;
 
