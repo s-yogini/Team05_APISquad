@@ -16,8 +16,8 @@ import io.cucumber.testng.CucumberOptions;
 		monochrome=false,  //console output color
 		features = {"src/test/resources/Feature" },
 		glue= {"stepDefinitions", "hooks"},
-		dryRun = false,
-		tags = "@vijitrial"		
+		dryRun = false
+//		tags = "@postbatch"		
 		
 		)
 
