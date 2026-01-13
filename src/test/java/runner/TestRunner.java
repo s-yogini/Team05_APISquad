@@ -14,10 +14,10 @@ import io.cucumber.testng.CucumberOptions;
 		        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" // Extent report
 				},
 		monochrome=false,  //console output color
-		features = {"src/test/resources/features" },
+		features = {"src/test/resources/Feature" },
 		glue= {"stepDefinitions", "hooks"},
-		dryRun = false
-		//tags = "@putClassDetails or @loginPost"		
+		dryRun = false,
+		tags = "@vijitrial"		
 		
 		)
 
