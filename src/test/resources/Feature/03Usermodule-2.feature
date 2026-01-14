@@ -6,11 +6,11 @@ Given Admin has valid Bearer token
 
 @GETuserbyProgramID
 Scenario Outline: Check if Admin is able to retrieve user with valid/invalid Program ID
-    Given Admin creates GET Request with valid or invalid Program Id for "<scenario>"
+    Given Admin creates GET Request with valid or invalid Program Id for "<ScenarioName>"
     When Admin sends HTTPS user Request with endpoint for "Program ID"
     Then Admin receives StatusCode with statusText
     Examples:
-      |scenario|
+      |ScenarioName|
       |GETuserbyValidProgramID|
       |GETuserbyInValidProgramID|
    #   |GETuserbyDeletedProgramID|
@@ -61,11 +61,11 @@ Scenario Outline: Check if Admin is able to retreive user details by ID
       
 @PUTupdateuser
 Scenario Outline: Check if Admin is able to update user details for existing User ID
-    Given Admin creates PUT Request to update user details for existing User ID for "<scenario>"
+    Given Admin creates PUT Request to update user details for existing User ID for "<ScenarioName>"
     When Admin sends HTTPS user Request with endpoint "User"
     Then Admin receives StatusCode with statusText
     Examples:
-      |scenario|
+      |ScenarioName|
       |Update Existing User ID with mandatory fields|
      # |Update Existing User ID without mandatory fields|
      # |Update Existing User ID with missing fields|
