@@ -6,9 +6,9 @@ Given Admin set Authorization to Bearer token
 
 @postProgram
 Scenario Outline: Check if admin is able to create program with valid/invalid details
-Given Admin creates Post Request for the LMS with request body "<Scenario>"
-When Admin sends Post HTTPS Request and request Body with endpoint
-Then Admin receives StatusCode with statusText "<Scenario>"
+Given Admin creates Program for the LMS with request body "<Scenario>"
+When Admin sends Post HTTPS Request and request Body with endpoint for Program
+Then Admin receives StatusCode with statusText "<Scenario>" for Program
 
 Examples:
 | Scenario               |
@@ -22,6 +22,50 @@ Examples:
 | Mandatory            |
 | Full Details         |
 
+@getAllProgram @getAllProgramWithAdmins
+Scenario Outline: Check if admin is able to GetAllProgram with valid/invalid details
+Given Admin sends Get Request All Program for the LMS with request body "<Scenario>"
+When Admin sends Get HTTPS Request and request Body with "endpoint" endpoint for Program
+Then Admin receives the StatusCode with statusText "<Scenario>" for Program
+And Admin receives All Programs "<Scenario>" for Get request 
+
+Examples:
+| Scenario                              |
+| GetAllProgramWithInvalidEndpoint      |
+| GetAllProgramWithInvalidMethod        |
+| GetAllProgramWithNoAuth               |
+| GetAllProgramValid                    |
+| GetAllProgramWithInvalidBaseURI       |
+
+@getAllProgramWithUsers 
+Scenario Outline: Check if admin is able to GetAllProgramwithUsers with valid/invalid details
+Given Admin sends Get Request All Program for the LMS with request body "<Scenario>"
+When Admin sends Get HTTPS Request and request Body with "endpoint" endpoint for Program
+Then Admin receives the StatusCode with statusText "<Scenario>" for Program
+And Admin receives All Programs "<Scenario>" for Get request 
+
+Examples:
+| Scenario                              |
+| GetAllProgramUsersWithInvalidEndpoint |
+| GetAllProgramUsersWithInvalidMethod   |
+| GetAllProgramUsersWithNoAuth          |
+| GetAllProgramUsersValid               |
+| GetAllProgramUserWithInvalidBaseURI   |
+
+@getProgramById
+Scenario Outline: Check if admin is able to GET program by programID with valid/invalid details
+Given Admin creates Get Request for the LMS with request body "<Scenario>"
+When Admin sends Get HTTPS Request and request Body with "programId" endpoint
+Then Admin receives StatusCode with statusText "<Scenario>" for GetProgramById
+And Admin receives Response Body for the given programId
+
+#Examples:
+#| Scenario                          |
+#| GetProgramByInvalidID             |
+#| GetProgramByIdWithNoAuth          |
+#| GetProgramByIdWithInvalidEndpoint |
+#| GetProgramByIdWithInvalidBaseURI  |
+#| GetProgramByvalidID               |
 
 #@putProgramById
 #Scenario Outline: Check if admin is able to update program by programID with valid/invalid details
@@ -56,40 +100,8 @@ Examples:
 #| PutValidProgramName           |
 #| PutStatusByProgramName        |
 
-#@getProgramById
-#Scenario Outline: Check if admin is able to GET program by programID with valid/invalid details
-#Given Admin creates Get Request for the LMS with request body "<Scenario>"
-#When Admin sends Get HTTPS Request and request Body with "programId" endpoint
-#Then Admin receives StatusCode with statusText "<Scenario>" for GetProgramById
-#And Admin receives Response Body for the given programId
 
-#Examples:
-#| Scenario                          |
-#| GetProgramByInvalidID             |
-#| GetProgramByIdWithNoAuth          |
-#| GetProgramByIdWithInvalidEndpoint |
-#| GetProgramByIdWithInvalidBaseURI  |
-#| GetProgramByvalidID               |
 
-#@getAllProgramWithUsers @getAllProgram
-#Scenario Outline: Check if admin is able to GetAllProgramUsers/GetAllProgram with valid/invalid details
-#Given Admin creates Request for the LMS with request body "<Scenario>"
-#When Admin sends HTTPS Request and request Body with "No" endpoint
-#Then Admin receives the StatusCode with statusText "<Scenario>" 
-#And Admin receives all programs with users "<Scenario>" for Get request
-
-#Examples:
-#| Scenario                              |
-#| GetAllProgramUsersWithInvalidEndpoint |
-#| GetAllProgramUsersWithInvalidMethod   |
-#| GetAllProgramUsersWithNoAuth          |
-#| GetAllProgramUserWithInvalidBaseURI   |
-#| GetAllProgramUsersValid               |
-#| GetAllProgramWithInvalidEndpoint      |
-#| GetAllProgramWithInvalidMethod        |
-#| GetAllProgramWithInvalidBaseURI       |
-#| GetAllProgramWithNoAuth               |
-#| GetAllProgramValid                    |
 
 
 
