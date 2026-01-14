@@ -32,7 +32,7 @@ public class ProgramBatchPayload {
 	        currentRow = CommonUtils.getCurrentRow(scenario,sheetName);
 	        Map<String, Object> batchDetails = new HashMap<String, Object>();
 	        ProgramBatchPojo batch = new ProgramBatchPojo(currentRow.get("batchName"),currentRow.get("batchStatus"));
-	        BatchDescriptionStoragePojo batchDescriptionStoragePojo = getBatchDetailsFromStorage(currentRow.get("batchName"));
+	        ProgramBatchDescriptionStoragePojo batchDescriptionStoragePojo = getBatchDetailsFromStorage(currentRow.get("batchName"));
 	        batch.setBatchDescription(batchDescriptionStoragePojo.getBatchDescription());
 	        batch.setBatchNoOfClasses(batchDescriptionStoragePojo.getBatchNoOfClasses());
 	        LOGGER.info("Read batch details from Excel file: " + batch);
@@ -41,9 +41,9 @@ public class ProgramBatchPayload {
 	        return batchDetails;
 	    }
 
-	    public static BatchDescriptionStoragePojo getBatchDetailsFromStorage(String batchName) throws IOException {
+	    public static ProgramBatchDescriptionStoragePojo getBatchDetailsFromStorage(String batchName) throws IOException {
 	        ObjectMapper mapper = new ObjectMapper();
-	        List<BatchDescriptionStoragePojo> data = mapper.readValue(new File(FILE_PATH), new TypeReference <List<BatchDescriptionStoragePojo>>(){});
+	        List<ProgramBatchDescriptionStoragePojo> data = mapper.readValue(new File(FILE_PATH), new TypeReference <List<ProgramBatchDescriptionStoragePojo>>(){});
 	        return data.stream()
 	                .filter(batch -> batch.getBatchName().equalsIgnoreCase(batchName))
 	                .findFirst()

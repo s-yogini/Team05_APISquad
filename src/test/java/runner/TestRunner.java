@@ -14,12 +14,13 @@ import io.cucumber.testng.CucumberOptions;
 		        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" // Extent report
 				},
 		monochrome=false,  //console output color
-		features = {"src/test/resources/Feature" },
+		features = {"src/test/resources/Feature/06SkillMasterModule.feature" },
 		glue= {"stepDefinitions"},
+			//	tags = " @GetAllSkill",
 		dryRun = false
-// 		tags = "@post"		
 		
-		)
+		
+		) 
 
 public class TestRunner extends AbstractTestNGCucumberTests{
 	

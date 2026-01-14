@@ -2,7 +2,6 @@ package requests;
 
 import static io.restassured.RestAssured.given;
 import java.io.IOException;
-import java.io.ObjectInputFilter.Config;
 import java.text.ParseException;
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -14,7 +13,6 @@ import commons.Commons;
 import payload.ProgramPayload;
 import pojo.ProgramPojo;
 import io.restassured.RestAssured;
-import java.util.ResourceBundle;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -28,7 +26,7 @@ public class ProgramRequest extends CommonUtils{
 	private static final String INVALID_TOKEN = "jbnsjokfi";
 	
 	public RequestSpecification setAuth() {
-		RestAssured.baseURI = config.getString("baseUrl");
+		RestAssured.baseURI = endpoints.getString("baseUrl");
 		return given()
 				.header("Authorization", "Bearer " + TokenManager.getToken());
 	}
@@ -60,7 +58,7 @@ public class ProgramRequest extends CommonUtils{
 					.header("Authorization", "Bearer " + INVALID_TOKEN);
 		}
 		else if(scenarioName.contains("InvalidBaseURI")) {
-			RestAssured.baseURI = config.getString("invalidBaseUrl");
+			RestAssured.baseURI = endpoints.getString("invalidBaseUrl");
 			return given()
 					.header("Authorization", "Bearer " + TokenManager.getToken());
 		}
@@ -112,7 +110,7 @@ public class ProgramRequest extends CommonUtils{
 		String programName = response.jsonPath().getString("programName");
 		Commons.setProgramName(programName);
 		//JSONschema response is same for both post and put requests
-		String schemaPath = config.getString("createProgramSchemaPath");
+		String schemaPath = endpoints.getString("createProgramSchemaPath");
 		CommonUtils.validateResponseSchema(response,schemaPath);
 	}
 	

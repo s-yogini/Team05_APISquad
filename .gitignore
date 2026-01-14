@@ -7,3 +7,5 @@ allure-results/
 ExtentReport/
 Team5APISquadLog.txt
 
+/.apt_generated/
+/.apt_generated_tests/
