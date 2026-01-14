@@ -29,14 +29,15 @@ public class UserRequest extends CommonUtils {
 		private static final int INVALID_PROGRAM_NAME = 4567;
 		private static final String INVALID_TOKEN = "jbnsjokfi";
 	    
-
-		
-	
 			
 		
 		public RequestSpecification setAuth() {
+
 			RestAssured.baseURI = CommonUtils.endpoints.getString("baseUrl");
 			TokenManager.setToken("");
+
+			RestAssured.baseURI = endpoints.getString("baseUrl");
+
 			return given()
 					.header("Authorization", "Bearer " + TokenManager.getToken());
 		}
@@ -70,7 +71,9 @@ public class UserRequest extends CommonUtils {
 						.header("Authorization", "Bearer " + INVALID_TOKEN);
 			}
 			else if(scenarioName.contains("InvalidBaseURI")) {
+
 				RestAssured.baseURI = CommonUtils.endpoints.getString("invalidBaseUrl");
+
 				return given()
 						.header("Authorization", "Bearer " + TokenManager.getToken());
 			}

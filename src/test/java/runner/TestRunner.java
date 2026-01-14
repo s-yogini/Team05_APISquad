@@ -14,12 +14,14 @@ import io.cucumber.testng.CucumberOptions;
 		        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" // Extent report
 				},
 		monochrome=false,  //console output color
+
 		features = {"src/test/resources/Feature/05ProgramBatchModule.feature" },
 		glue= {"stepDefinitions","Hooks"},
 		dryRun = false,
  		tags = "@vijitrial"		
+
 		
-		)
+		) 
 
 public class TestRunner extends AbstractTestNGCucumberTests{
 	
