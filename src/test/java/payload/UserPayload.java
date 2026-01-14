@@ -57,7 +57,10 @@ public class UserPayload extends CommonUtils {
                 userLogin.setUserLoginEmail(currentRow.get("userLoginEmail"));
                 userLogin.setLoginStatus(currentRow.get("loginStatus"));
                 userLogin.setStatus(currentRow.get("status"));
+
+                userPojo.setUserLogin("userLogin");
                 userPojo.setUserLogin(userLogin); 
+
             }
         }
 
