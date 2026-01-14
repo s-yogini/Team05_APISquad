@@ -2,25 +2,42 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import requests.UserRequest;
 
 
 public class UserModuleSteps2 {
 	
+	private UserRequest UserRequest;
+    private RequestSpecification requestSpec;
+    private Response response;
+	
 	@Given("Admin has valid Bearer token")
 	public void admin_has_valid_bearer_token() {
-	   
+		// Initialize UserRequest and set base URI + token
+        UserRequest = new UserRequest();
+        requestSpec = UserRequest.setAuth();
 	    
 	}
 
 	@Given("Admin creates GET Request with valid or invalid Program Id for {string}")
-	public void admin_creates_get_request_with_valid_or_invalid_program_id_for(String string) {
-	   
+	public void admin_creates_get_request_with_valid_or_invalid_program_id_for(String Scenario) {
+		
+		// Load data from Excel and populate userPojo + currentRow
+        UserRequest.createUser(Scenario);
+
+        // Build the final RequestSpecification (headers, body, negative cases logic)
+        requestSpec = UserRequest.buildRequest(requestSpec);
 	    
 	}
 
 	@When("Admin sends HTTPS user Request with endpoint")
 	public void admin_sends_https_user_request_with_endpoint() {
-	   
+		// Send request using endpoint from Excel currentRow
+        response = UserRequest.sendRequest(requestSpec);
+        // Optionally store response body details
+        UserRequest.saveResponseBody(response);
 	    
 	}
 
