@@ -1,4 +1,9 @@
 package stepDefinitions;
+import java.io.IOException;
+import java.text.ParseException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,46 +21,48 @@ public class UserModuleSteps2 {
 	@Given("Admin has valid Bearer token")
 	public void admin_has_valid_bearer_token() {
 		// Initialize UserRequest and set base URI + token
-        UserRequest = new UserRequest();
+		UserRequest = new UserRequest();
         requestSpec = UserRequest.setAuth();
 	    
 	}
 
 	@Given("Admin creates GET Request with valid or invalid Program Id for {string}")
-	public void admin_creates_get_request_with_valid_or_invalid_program_id_for(String Scenario) {
+	public void admin_creates_get_request_with_valid_or_invalid_program_id_for(String scenario) throws Exception {
 		
-		// Load data from Excel and populate userPojo + currentRow
-        UserRequest.createUser(Scenario);
+		UserRequest = new UserRequest();
+	    UserRequest.getUsersByProgramId(scenario);        // load row for this scenario
+	    requestSpec = UserRequest.setAuth();
+	    requestSpec = UserRequest.buildRequest(requestSpec);
+	    
+	}
 
-        // Build the final RequestSpecification (headers, body, negative cases logic)
-        requestSpec = UserRequest.buildRequest(requestSpec);
+	@When("Admin sends HTTPS user Request with endpoint for {string}")
+	public void admin_sends_https_user_request_with_endpoint_for(String EndPoint) {
+		response = UserRequest.sendRequest(requestSpec);      	    
+	}
+
+	@Then("Admin receives StatusCode with statusText")
+	public void admin_receives_status_code_with_status_text() {
+		
+		// Expected status code from Excel
+				System.out.println(response);
+	}
+
+	@Given("Admin creates GET Request with valid or invalid Role ID for {string}")
+	public void admin_creates_get_request_with_valid_or_invalid_role_id_for(String scenario) throws InvalidFormatException, IOException, ParseException {
+		
 	    
 	}
 
 	@When("Admin sends HTTPS user Request with endpoint")
 	public void admin_sends_https_user_request_with_endpoint() {
-		// Send request using endpoint from Excel currentRow
-        response = UserRequest.sendRequest(requestSpec);
-        // Optionally store response body details
-        UserRequest.saveResponseBody(response);
-	    
+		
 	}
-
-	@Then("Admin receives StatusCode with statusText")
-	public void admin_receives_status_code_with_status_text() {
-	   
-	    
-	}
-
-	@Given("Admin creates GET Request with valid or invalid Role ID for {string}")
-	public void admin_creates_get_request_with_valid_or_invalid_role_id_for(String string) {
-	   
-	    
-	}
-
+	
 	@Given("Admin creates GET Request with valid or invalid Role ID V2 for {string}")
 	public void admin_creates_get_request_with_valid_or_invalid_role_id_v2_for(String string) {
 	   
+		
 	    
 	}
 
@@ -72,9 +79,25 @@ public class UserModuleSteps2 {
 	}
 
 	@Given("Admin creates PUT Request to update user details for existing User ID for {string}")
-	public void admin_creates_put_request_to_update_user_details_for_existing_user_id_for(String string) {
+	public void admin_creates_put_request_to_update_user_details_for_existing_user_id_for(String scenario) throws Exception {
 	   
-	    
+
+		UserRequest = new UserRequest(); 
+		// Load Excel row first — this sets currentRow 
+		UserRequest.updateUser(scenario); 
+		// Then set base URI + token 
+		requestSpec = UserRequest.setAuth(); 
+		
+		// Now build request safely 
+		requestSpec = UserRequest.buildRequest(requestSpec);
+	}
+	
+	@When("Admin sends HTTPS user Request with endpoint {string}")
+	public void admin_sends_https_user_request_with_endpoint(String string) {
+		// Send request using endpoint from Excel currentRow
+        response = UserRequest.sendRequest(requestSpec);
+        // Optionally store response body details
+        UserRequest.saveResponseBody(response);
 	}
 
 	@Given("Admin creates PUT Request to update user Role ID for existing User ID for {string}")
