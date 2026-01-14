@@ -48,8 +48,8 @@ public class ProgramStepDefinition {
 		}
 	}
 
-	@Given("Admin creates Get Request All Program for the LMS with request body {string}")
-	public void admin_creates_get_request_all_program_for_the_lms_with_request_body(String scenario) 
+	@Given("Admin sends Get Request All Program for the LMS with request body {string}")
+	public void admin_sends_get_request_all_program_for_the_lms_with_request_body(String scenario) 
 	  throws InvalidFormatException, IOException, ParseException {
 		programrequest.createProgram(scenario);
 		requestSpec = programrequest.buildRequest(requestSpec);
@@ -81,11 +81,15 @@ public class ProgramStepDefinition {
 		}
 	}
 	
-	@Then("Admin receives All Programs with users {string} for Get request")
-	public void admin_receives_all_programs_with_users_for_get_request(String string) {
-		if(response.getStatusCode() == 200)
-		{
-			programrequest.validateGetProgramIDResponseBodyDetails(response);
+	@Then("Admin receives All Programs {string} for Get request")
+	public void admin_receives_all_programs_for_get_request(String scenario) {
+		if(response.getStatusCode() == 200){
+			if(scenario.contains("Users")) {
+				programrequest.validateGetAllProgramUsersResponseBody(response);
+			}
+			else {
+				programrequest.validateGetAllProgramResponseBody(response);
+			}
 		}
 	}
 }
