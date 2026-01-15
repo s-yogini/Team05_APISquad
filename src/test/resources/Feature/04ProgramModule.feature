@@ -19,12 +19,12 @@ Examples:
 | NoAuth                 |
 | PostWithoutRequestBody |
 | Invalid Request Body   |
-| Mandatory            |
-| Full Details         |
+| Mandatory           	 |
+| Valid Details      	 |
 
 @getAllProgram @getAllProgramWithAdmins
 Scenario Outline: Check if admin is able to GetAllProgram with valid/invalid details
-Given Admin sends Get Request All Program for the LMS with request body "<Scenario>"
+Given Admin sends Get Request Program for the LMS with request body "<Scenario>"
 When Admin sends Get HTTPS Request and request Body with "endpoint" endpoint for Program
 Then Admin receives the StatusCode with statusText "<Scenario>" for Program
 And Admin receives All Programs "<Scenario>" for Get request 
@@ -39,10 +39,10 @@ Examples:
 
 @getAllProgramWithUsers 
 Scenario Outline: Check if admin is able to GetAllProgramwithUsers with valid/invalid details
-Given Admin sends Get Request All Program for the LMS with request body "<Scenario>"
+Given Admin sends Get Request Program for the LMS with request body "<Scenario>"
 When Admin sends Get HTTPS Request and request Body with "endpoint" endpoint for Program
 Then Admin receives the StatusCode with statusText "<Scenario>" for Program
-And Admin receives All Programs "<Scenario>" for Get request 
+And Admin recives all Programs with users "<Scenario>" 
 
 Examples:
 | Scenario                              |
@@ -54,18 +54,18 @@ Examples:
 
 @getProgramById
 Scenario Outline: Check if admin is able to GET program by programID with valid/invalid details
-Given Admin creates Get Request for the LMS with request body "<Scenario>"
+Given Admin sends Get Request Program for the LMS with request body "<Scenario>"
 When Admin sends Get HTTPS Request and request Body with "programId" endpoint
-Then Admin receives StatusCode with statusText "<Scenario>" for GetProgramById
+Then Admin receives StatusCode with statusText "<Scenario>" for Program
 And Admin receives Response Body for the given programId
 
-#Examples:
-#| Scenario                          |
-#| GetProgramByInvalidID             |
-#| GetProgramByIdWithNoAuth          |
-#| GetProgramByIdWithInvalidEndpoint |
-#| GetProgramByIdWithInvalidBaseURI  |
-#| GetProgramByvalidID               |
+Examples:
+| Scenario                          |
+| GetProgramByInvalidID             |
+| GetProgramByIdWithNoAuth          |
+| GetProgramByIdWithInvalidEndpoint |
+| GetProgramByIdWithInvalidBaseURI  |
+| GetProgramByvalidID               |
 
 #@putProgramById
 #Scenario Outline: Check if admin is able to update program by programID with valid/invalid details
@@ -99,6 +99,7 @@ And Admin receives Response Body for the given programId
 #| InvalidToken                  |
 #| PutValidProgramName           |
 #| PutStatusByProgramName        |
+
 
 
 
