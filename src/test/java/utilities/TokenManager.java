@@ -1,17 +1,22 @@
 package utilities;
 
 public class TokenManager {
-	
-	private static String token;
+    private static String token;
+    private static String userId;
 
-	// Method to set the token
-	public static void setToken(String generatedToken) {
-		token = generatedToken;
-	}
+    public static void setToken(String newToken) {
+        token = newToken;
+    }
 
-	// Method to get the token
-	public static String getToken() {
-		return token;
-	}
+    public static String getToken() {
+        return token;
+    }
 
+    public static void setUserId(String newUserId) {
+        userId = newUserId;
+    }
+
+    public static String getUserId() {
+        return userId;
+    }
 }
