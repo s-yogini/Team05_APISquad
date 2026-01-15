@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Jan 12 10:22:43 CST 2026</td>
+<td>Started on:</td><td>Wed Jan 14 18:24:30 EST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (31 ms)</td>
+<tr><td>Total time:</td><td>3 seconds (3814 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,5 +67,74 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='runner.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Check if Admin is able to retrieve user with valid/invalid Program ID", "GET operations for User Module"</td>
+<td><div><pre>org.apache.logging.log4j.core.config.ConfigurationException: No type attribute provided for component log4j
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder.createComponent(PropertiesConfigurationBuilder.java:362)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder.processRemainingProperties(PropertiesConfigurationBuilder.java:206)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder.build(PropertiesConfigurationBuilder.java:190)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationFactory.getConfiguration(PropertiesConfigurationFactory.java:56)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationFactory.getConfiguration(PropertiesConfigurationFactory.java:34)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:544)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:463)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory.getConfiguration(ConfigurationFactory.java:321)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:778)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:808)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:311)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:160)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:48)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:139)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:557)
+	at payload.UserPayload.&lt;init&gt;(UserPayload.java:18)
+	at requests.UserRequest.getUsersByProgramId(UserRequest.java:138)
+	at stepDefinitions.UserModuleSteps2.admin_creates_get_request_with_valid_or_invalid_program_id_for(UserModuleSteps2.java:33)
+	at ✽.Admin creates GET Request with valid or invalid Program Id for &quot;GETuserbyValidProgramID&quot;(file:///C:/Users/prasa/git/Team05_APISquad/src/test/resources/Feature/03Usermodule-2.feature:9)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1389810291", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1389810291'><pre>org.apache.logging.log4j.core.config.ConfigurationException: No type attribute provided for component log4j
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder.createComponent(PropertiesConfigurationBuilder.java:362)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder.processRemainingProperties(PropertiesConfigurationBuilder.java:206)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder.build(PropertiesConfigurationBuilder.java:190)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationFactory.getConfiguration(PropertiesConfigurationFactory.java:56)
+	at org.apache.logging.log4j.core.config.properties.PropertiesConfigurationFactory.getConfiguration(PropertiesConfigurationFactory.java:34)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:544)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory$Factory.getConfiguration(ConfigurationFactory.java:463)
+	at org.apache.logging.log4j.core.config.ConfigurationFactory.getConfiguration(ConfigurationFactory.java:321)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:778)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:808)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:311)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:160)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:48)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:139)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:557)
+	at payload.UserPayload.&lt;init&gt;(UserPayload.java:18)
+	at requests.UserRequest.getUsersByProgramId(UserRequest.java:138)
+	at stepDefinitions.UserModuleSteps2.admin_creates_get_request_with_valid_or_invalid_program_id_for(UserModuleSteps2.java:33)
+	at ✽.Admin creates GET Request with valid or invalid Program Id for &quot;GETuserbyValidProgramID&quot;(file:///C:/Users/prasa/git/Team05_APISquad/src/test/resources/Feature/03Usermodule-2.feature:9)
+</pre></div></td>
+<td>1</td>
+<td>runner.TestRunner@1dac5ef</td></tr>
+<tr>
+<td title='runner.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runner.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Check if Admin is able to retrieve user with valid/invalid Program ID", "GET operations for User Module"</td>
+<td><div><pre>java.lang.IllegalArgumentException: programId must be valid integer: 65.0
+	at requests.UserRequest.getUsersByProgramId(UserRequest.java:155)
+	at stepDefinitions.UserModuleSteps2.admin_creates_get_request_with_valid_or_invalid_program_id_for(UserModuleSteps2.java:33)
+	at ✽.Admin creates GET Request with valid or invalid Program Id for &quot;GETuserbyInValidProgramID&quot;(file:///C:/Users/prasa/git/Team05_APISquad/src/test/resources/Feature/03Usermodule-2.feature:9)
+</pre></div><a href='#' onClick='toggleBox("stack-trace315885065", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace315885065'><pre>java.lang.IllegalArgumentException: programId must be valid integer: 65.0
+	at requests.UserRequest.getUsersByProgramId(UserRequest.java:155)
+	at stepDefinitions.UserModuleSteps2.admin_creates_get_request_with_valid_or_invalid_program_id_for(UserModuleSteps2.java:33)
+	at ✽.Admin creates GET Request with valid or invalid Program Id for &quot;GETuserbyInValidProgramID&quot;(file:///C:/Users/prasa/git/Team05_APISquad/src/test/resources/Feature/03Usermodule-2.feature:9)
+</pre></div></td>
+<td>1</td>
+<td>runner.TestRunner@1dac5ef</td></tr>
+</table><p>
 </body>
 </html>

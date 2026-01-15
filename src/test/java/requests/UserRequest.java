@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.testng.Assert;
 
 import commons.Commons;
 import io.restassured.RestAssured;
@@ -29,13 +30,22 @@ public class UserRequest extends CommonUtils {
 		private static final int INVALID_PROGRAM_NAME = 4567;
 		private static final String INVALID_TOKEN = "jbnsjokfi";
 	    
-
-		
+<<<<<<< HEAD
 	
+=======
 			
+>>>>>>> b0c9134626cd266304813f9f0423581915fbec23
 		
 		public RequestSpecification setAuth() {
+
 			RestAssured.baseURI = CommonUtils.endpoints.getString("baseUrl");
+<<<<<<< HEAD
+=======
+			TokenManager.setToken("");
+
+			RestAssured.baseURI = endpoints.getString("baseUrl");
+
+>>>>>>> b0c9134626cd266304813f9f0423581915fbec23
 			return given()
 					.header("Authorization", "Bearer " + TokenManager.getToken());
 		}
@@ -67,10 +77,15 @@ public class UserRequest extends CommonUtils {
 						.header("Authorization", "Bearer " + INVALID_TOKEN);
 			}
 			else if(scenarioName.contains("InvalidBaseURI")) {
+
 				RestAssured.baseURI = CommonUtils.endpoints.getString("invalidBaseUrl");
+
 				return given()
 						.header("Authorization", "Bearer " + TokenManager.getToken());
 			}
+			else if(scenarioName.contains("User") || scenarioName.contains("Post")) {
+		        requestSpec.body(userPojo);
+		    }
 
 			// Set content type from currentRow
 			requestSpec.contentType(currentRow.get("ContentType"));
@@ -115,6 +130,44 @@ public class UserRequest extends CommonUtils {
 				return null;
 			}
 		}
+	
+		public void updateUser(String scenario) throws Exception {
+		    // 1. Load Excel data
+		    Map<String, Object> userDetails = new UserPayload().getDataFromExcel(scenario);
+		    if(userDetails == null || userDetails.get("userPojo") == null) {
+		        throw new IllegalStateException("Failed to load user data from Excel for scenario: " + scenario);
+		    }
+		    
+		    this.userPojo = (UserPojo) userDetails.get("userPojo");
+		    this.currentRow = (Map<String, String>) userDetails.get("currentRow");
+		    
+		    // 2. Extract userId for path parameter (MANDATORY)
+		    String userId = currentRow.get("userId");
+		    if(userId == null || userId.trim().isEmpty()) {
+		        throw new IllegalArgumentException("userId is mandatory for PUT /users/{userId} - check Excel data");
+		    }}
+		    
+		public void getUsersByProgramId(String scenario) throws Exception {
+		    // 1. Load Excel data
+		    Map<String, Object> userDetails = new UserPayload().getDataFromExcel(scenario);
+		    if(userDetails == null || userDetails.get("currentRow") == null) {
+		        throw new IllegalStateException("Failed to load data from Excel for scenario: " + scenario);
+		    }
+		    
+		    this.currentRow = (Map<String, String>) userDetails.get("currentRow");
+		    
+		    // 2. Extract programId as INTEGER for path/query parameter (MANDATORY)
+		    String programIdStr = currentRow.get("programId");
+		    if(programIdStr == null || programIdStr.trim().isEmpty()) {
+		        throw new IllegalArgumentException("programId is mandatory for GET /users/program/{programId} - check Excel data");
+		    }
+		    
+		    int programId;
+		    try {
+		        programId = Integer.parseInt(programIdStr.trim());
+		    } catch (NumberFormatException e) {
+		        throw new IllegalArgumentException("programId must be valid integer: " + programIdStr);
+		    }}
 		
 		public void saveResponseBody(Response response) {
 			String userId = response.jsonPath().getString("userId");
