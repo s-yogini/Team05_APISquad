@@ -70,6 +70,8 @@ public class UserPojo {
 	//    private String userLogin;
 	//solution 2:   // @JsonProperty("userLogin")
 	   // private UserLogin userLogin;
+
+		private UserLogin userLogin;
 	    
 	  public static class UserLogin {
 	        @JsonProperty("userLoginEmail")
@@ -228,6 +230,30 @@ public class UserPojo {
 	    //	this.userLogin = userLogin; 
 	    	//}
 	    public void setUserLogin(UserLogin userLogin) { this.userLogin = userLogin; }
+	    
+	    @JsonProperty("programId")
+	    private String programId;
+
+	    public String getProgramId() {
+	        return programId;
+	    }
+
+	    public void setProgramId(String string) {
+	        this.programId = string;
+	    }
+	    
+	    @JsonProperty("userId")
+	    private String userId;
+
+	    public String getUserId() {
+	        return userId;
+	    }
+
+	    public void setUserId(String userId) {
+	        this.userId = userId;
+	    }
+
+		
 	}
 
 

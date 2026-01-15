@@ -2,7 +2,10 @@ package requests;
 
 import static io.restassured.RestAssured.given;
 import java.io.IOException;
+<<<<<<< HEAD
 //import java.io.ObjectInputFilter.Config;
+=======
+>>>>>>> jaanvi
 import java.text.ParseException;
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -28,7 +31,9 @@ public class ProgramRequest extends CommonUtils{
 	
 	public RequestSpecification setAuth() {
 		RestAssured.baseURI = endpoints.getString("baseUrl");
+
 		TokenManager.setToken("");
+
 		return given()
 				.header("Authorization", "Bearer " + TokenManager.getToken());
 	}
