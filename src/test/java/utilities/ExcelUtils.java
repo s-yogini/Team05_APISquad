@@ -1,6 +1,7 @@
 package utilities;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,10 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 public class ExcelUtils {
 	
@@ -56,5 +60,50 @@ public class ExcelUtils {
 	        }
 	        return true; // Row is empty
 	    }
+	    
+	    
+	    public static void writeCell(String filePath, String sheetName, String scenarioName, String columnName, String value)
+	            throws IOException, InvalidFormatException {
+
+	        FileInputStream fis = new FileInputStream(filePath);
+	        Workbook workbook = WorkbookFactory.create(fis);
+	        Sheet sheet = workbook.getSheet(sheetName);
+
+	        int scenarioCol = -1;
+	        int targetCol = -1;
+
+	        Row headerRow = sheet.getRow(0);
+
+	        // Find column indexes
+	        for (Cell cell : headerRow) {
+	            if (cell.getStringCellValue().equalsIgnoreCase("ScenarioName")) {
+	                scenarioCol = cell.getColumnIndex();
+	            }
+	            if (cell.getStringCellValue().equalsIgnoreCase(columnName)) {
+	                targetCol = cell.getColumnIndex();
+	            }
+	        }
+
+	        if (scenarioCol == -1 || targetCol == -1) {
+	            throw new RuntimeException("Column not found in Excel: " + columnName);
+	        }
+
+	        // Find row for scenario
+	        for (Row row : sheet) {
+	            Cell scenarioCell = row.getCell(scenarioCol);
+	            if (scenarioCell != null && scenarioCell.getStringCellValue().equalsIgnoreCase(scenarioName)) {
+	                row.createCell(targetCol).setCellValue(value);
+	                break;
+	            }
+	        }
+
+	        fis.close();
+
+	        FileOutputStream fos = new FileOutputStream(filePath);
+	        workbook.write(fos);
+	        fos.close();
+	        workbook.close();
+	    }
+
 
 }
